@@ -34,7 +34,7 @@ module conf_arst_bridge #(
     output  wire    rst_o
 );
 //====================================================================================
-    logic[1:0]  l_rst_int;
+    logic[1:0]  rst_int_l;
 //====================================================================================
     generate
     if ((IN_RES_POL == "ACTIVE_HIGH") && (OUT_RES_POL == "ACTIVE_HIGH") && 
@@ -43,14 +43,14 @@ module conf_arst_bridge #(
         always_ff@(posedge clk_i or posedge rst_i) begin : RES_RESYNC
             if (rst_i) begin
 
-                l_rst_int[0]    <= 1'b1;
-                l_rst_int[1]    <= 1'b1;
+                rst_int_l[0]    <= 1'b1;
+                rst_int_l[1]    <= 1'b1;
 
             end
             else begin
             
-                l_rst_int[0]    <= 1'b0;
-                l_rst_int[1]    <= l_rst_int[0];
+                rst_int_l[0]    <= 1'b0;
+                rst_int_l[1]    <= rst_int_l[0];
             
             end
         end
@@ -65,14 +65,14 @@ module conf_arst_bridge #(
         always_ff@(negedge clk_i or posedge rst_i) begin: RES_RESYNC
             if (rst_i) begin
                 
-                l_rst_int[0]    <= 1'b1;
-                l_rst_int[1]    <= 1'b1;
+                rst_int_l[0]    <= 1'b1;
+                rst_int_l[1]    <= 1'b1;
 
             end
             else begin
             
                 s_rst_int[0]    <= 1'b0;
-                s_rst_int[1]    <= l_rst_int[0];
+                s_rst_int[1]    <= rst_int_l[0];
             
             end
         end
@@ -87,14 +87,14 @@ module conf_arst_bridge #(
         always_ff@(posedge clk_i or posedge rst_i) begin: RES_RESYNC
             if (rst_i) begin
                 
-                l_rst_int[0]    <= 1'b0;
-                l_rst_int[1]    <= 1'b0;
+                rst_int_l[0]    <= 1'b0;
+                rst_int_l[1]    <= 1'b0;
                 
             end
             else begin
                 
-                l_rst_int[0]    <= 1'b1;
-                l_rst_int[1]    <= l_rst_int[0];
+                rst_int_l[0]    <= 1'b1;
+                rst_int_l[1]    <= rst_int_l[0];
             
             end
         end
@@ -109,14 +109,14 @@ module conf_arst_bridge #(
         always_ff@(negedge clk_i or posedge rst_i) begin: RES_RESYNC
             if (rst_i) begin
                 
-                l_rst_int[0]    <= 1'b0;
-                l_rst_int[1]    <= 1'b0;
+                rst_int_l[0]    <= 1'b0;
+                rst_int_l[1]    <= 1'b0;
 
             end
             else begin
             
-                l_rst_int[0]    <= 1'b1;
-                l_rst_int[1]    <= l_rst_int[0];
+                rst_int_l[0]    <= 1'b1;
+                rst_int_l[1]    <= rst_int_l[0];
             
             end
         end
@@ -132,14 +132,14 @@ module conf_arst_bridge #(
         begin
             if (!rst_i) begin
                 
-                l_rst_int[0]    <= 1'b1;
-                l_rst_int[1]    <= 1'b1;
+                rst_int_l[0]    <= 1'b1;
+                rst_int_l[1]    <= 1'b1;
 
             end
             else begin
             
-                l_rst_int[0]    <= 1'b0;
-                l_rst_int[1]    <= l_rst_in[[0];
+                rst_int_l[0]    <= 1'b0;
+                rst_int_l[1]    <= l_rst_in[[0];
             
             end
         end
@@ -154,14 +154,14 @@ module conf_arst_bridge #(
         always_ff@(negedge clk_i or negedge rst_i) begin: RES_RESYNC
             if (!rst_i) begin
                 
-                l_rst_int[0]    <= 1'b1;
-                l_rst_int[1]    <= 1'b1;
+                rst_int_l[0]    <= 1'b1;
+                rst_int_l[1]    <= 1'b1;
             
             end
             else begin
             
-                l_rst_int[0]    <= 1'b0;
-                l_rst_int[1]    <= l_rst_int[0];
+                rst_int_l[0]    <= 1'b0;
+                rst_int_l[1]    <= rst_int_l[0];
             
             end
         end
@@ -176,14 +176,14 @@ module conf_arst_bridge #(
         always_ff@(posedge clk_i or negedge rst_i) begin: RES_RESYNC
             if (!rst_i) begin
                 
-                l_rst_int[0]    <= 1'b0;
-                l_rst_int[1]    <= 1'b0;
+                rst_int_l[0]    <= 1'b0;
+                rst_int_l[1]    <= 1'b0;
             
             end
             else begin
             
-                l_rst_int[0]    <= 1'b1;
-                l_rst_int[1]    <= l_rst_int[0];
+                rst_int_l[0]    <= 1'b1;
+                rst_int_l[1]    <= rst_int_l[0];
             
             end
         end
@@ -198,14 +198,14 @@ module conf_arst_bridge #(
         always_ff@(negedge clk_i or negedge rst_i) begin: RES_RESYNC
             if (!rst_i) begin
                 
-                l_rst_int[0]    <= 1'b0;
-                l_rst_int[1]    <= 1'b0;
+                rst_int_l[0]    <= 1'b0;
+                rst_int_l[1]    <= 1'b0;
 
             end 
             else begin
             
-                l_rst_int[0]    <= 1'b1;
-                l_rst_int[1]    <= l_rst_int[0];
+                rst_int_l[0]    <= 1'b1;
+                rst_int_l[1]    <= rst_int_l[0];
             
             end
         end
@@ -214,6 +214,6 @@ module conf_arst_bridge #(
     endgenerate
 //====================================================================================
     // Drive outputs
-    assign rst_o = l_rst_int[1];
+    assign rst_o = rst_int_l[1];
 //====================================================================================
 endmodule
